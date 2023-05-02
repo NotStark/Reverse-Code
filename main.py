@@ -42,7 +42,7 @@ async def _pp(_,msg):
          result['similar'] = url
     for best in soup.find_all('div', {'class': 'r5a77d'}):
         output = best.get_text(strip=True)
-        decoded_text = text.encode('utf-8').decode('unicode_escape')
+        decoded_text = output.encode('utf-8').decode('unicode_escape')
         result["output"] = decoded_text.replace("Results for",'')       
     await msg.reply(result)
 
