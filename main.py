@@ -44,14 +44,16 @@ async def _start(_,msg):
 
 @app.on_message(filters.command("pp"))
 async def _pp(_,msg):
+    txt = await msg.reply("wait a sec...")
     replied = msg.reply_to_message
     if not replied:
-        return await msg.reply("reply to a message")
+        return await text.edit("reply to a message")
     if not replied.photo:
-        return await msg.reply("reply to a photo pls")
+        return await text.edit("reply to a photo pls")
     file_id = replied.photo.file_id
     result = await Sauce(bot_token,file_id)
-    await msg.reply(f'[{result["output"]}]({result["similar"]})',reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Open Link",url=result["similar"])]]))
+    await text.edit("Requesting to Google....")
+    await text.edit(f'[{result["output"]}]({result["similar"]})',reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Open Link",url=result["similar"])]]))
    
  
                       
