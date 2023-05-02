@@ -50,9 +50,9 @@ async def _pp(_,msg):
         return await text.edit("reply to a message")
     if not replied.photo:
         return await text.edit("reply to a photo pls")
+    await text.edit("Requesting to Google....")
     file_id = replied.photo.file_id
     result = await Sauce(bot_token,file_id)
-    await text.edit("Requesting to Google....")
     await text.edit(f'[{result["output"]}]({result["similar"]})',reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Open Link",url=result["similar"])]]))
    
  
