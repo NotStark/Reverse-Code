@@ -44,7 +44,7 @@ async def _start(_,msg):
 
 @app.on_message(filters.command("pp"))
 async def _pp(_,msg):
-    txt = await msg.reply("wait a sec...")
+    text = await msg.reply("wait a sec...")
     replied = msg.reply_to_message
     if not replied:
         return await text.edit("reply to a message")
