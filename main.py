@@ -41,8 +41,6 @@ async def Sauce(bot_token,file_id):
 async def get_file_id_from_message(msg):
     file_id = None
     message = msg.reply_to_message
-    if not message:
-        return await msg.reply("reply to a media!")
     if message.document:
         if int(message.document.file_size) > 3145728:
             return
