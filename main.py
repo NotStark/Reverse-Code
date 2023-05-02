@@ -25,7 +25,7 @@ async def _pp(_,msg):
     if not replied.photo:
         return await msg.reply("reply to a photo pls")
     file_id = replied.photo.file_id
-    r = requests.post(f'https://api.telegram.org/bot{bot_token}/getFile?file_id={file_id}')
+    r = requests.post(f'https://api.telegram.org/bot{bot_token}/getFile?file_id={file_id}').json()
     file_path = r['result']['file_path']
     print(f"https://images.google.com/searchbyimage??safe=off&sbisrc=tg&image_url=https://api.telegram.org/file/bot{bot_token}/{file_path}")
                       
