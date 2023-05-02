@@ -15,6 +15,15 @@ app = Client(
 async def _start(_,msg):
     await msg.reply("hey there")
 
+@app.on_message(filters.command("pp"))
+async def _pp(_,msg):
+    replied = msg.reply_to_message
+    if not replied:
+        await msg.reply("reply to a message")
+    if not replied.photo:
+        await msg.reply("reply to a photo pls")
+    image_file_id = replied.photo.file_id
+    print(image_file_id)
 async def main():
     await app.start()
     print("bot started")
