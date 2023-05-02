@@ -19,11 +19,13 @@ async def _start(_,msg):
 async def _pp(_,msg):
     replied = msg.reply_to_message
     if not replied:
-        await msg.reply("reply to a message")
+        return await msg.reply("reply to a message")
     if not replied.photo:
-        await msg.reply("reply to a photo pls")
+        return await msg.reply("reply to a photo pls")
     image_file_id = replied.photo.file_id
-    print(image_file_id)
+    m = await _.save_file(image_file_id)
+    await msg.reply(m)
+    
 async def main():
     await app.start()
     print("bot started")
