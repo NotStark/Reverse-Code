@@ -41,7 +41,9 @@ async def _pp(_,msg):
          url = f"https://www.google.com/search?tbm=isch&q={quote_plus(similar_image.get('value'))}"
          result['similar'] = url
     for best in soup.find_all('div', {'class': 'r5a77d'}):
-        result['output'] = best.get_text(strip=True)
+        output = best.get_text(strip=True)
+        decoded_text = text.encode('utf-8').decode('unicode_escape')
+        result["output"] = decoded_text.replace("Results for",'')       
     await msg.reply(result)
 
  
