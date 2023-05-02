@@ -40,8 +40,8 @@ async def Sauce(bot_token,file_id):
 
 async def get_file_id_from_message(message):
     file_id = None
-    if not message.reply_to_message:
-        return None
+    message = message.reply_to_message
+  
     if message.document:
         if int(message.document.file_size) > 3145728:
             return
@@ -81,7 +81,7 @@ async def _pp(_,msg):
     text = await msg.reply("wait a sec...")
     file_id = await get_file_id_from_message(msg)
     if not file_id:
-        return await msg.reply("reply to media!")
+        return await text.edit("reply to media!")
     await text.edit("Requesting to Google....")    
     result = await Sauce(bot_token,file_id)
     await text.edit(f'[{result["output"]}]({result["similar"]})',reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Open Link",url=result["similar"])]]))
