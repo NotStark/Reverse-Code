@@ -1,1 +1,3 @@
-# R
+- Credits will be appreciatable
+- Dont forget to give a start if u r using this code in your bot
+- @Tech_Division
