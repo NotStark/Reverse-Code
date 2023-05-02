@@ -37,6 +37,38 @@ async def Sauce(bot_token,file_id):
         result["output"] = decoded_text
         
     return result
+
+async def get_file_id_from_message(message):
+    file_id = None
+    if message.document:
+        if int(message.document.file_size) > 3145728:
+            return
+        mime_type = message.document.mime_type
+        if mime_type not in ("image/png", "image/jpeg"):
+            return
+        file_id = message.document.file_id
+
+    if message.sticker:
+        if message.sticker.is_animated:
+            if not message.sticker.thumbs:
+                return
+            file_id = message.sticker.thumbs[0].file_id
+        else:
+            file_id = message.sticker.file_id
+
+    if message.photo:
+        file_id = message.photo.file_id
+
+    if message.animation:
+        if not message.animation.thumbs:
+            return
+        file_id = message.animation.thumbs[0].file_id
+
+    if message.video:
+        if not message.video.thumbs:
+            return
+        file_id = message.video.thumbs[0].file_id
+    return file_id
     
 @app.on_message(filters.command("start"))
 async def _start(_,msg):
@@ -45,13 +77,10 @@ async def _start(_,msg):
 @app.on_message(filters.command("pp"))
 async def _pp(_,msg):
     text = await msg.reply("wait a sec...")
-    replied = msg.reply_to_message
-    if not replied:
-        return await text.edit("reply to a message")
-    if not replied.photo:
-        return await text.edit("reply to a photo pls")
-    await text.edit("Requesting to Google....")
-    file_id = replied.photo.file_id
+    file_id = await get_file_id_from_message(msg)
+    if not file_id:
+        return await msg.reply("reply to media!")
+    await text.edit("Requesting to Google....")    
     result = await Sauce(bot_token,file_id)
     await text.edit(f'[{result["output"]}]({result["similar"]})',reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Open Link",url=result["similar"])]]))
    
