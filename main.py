@@ -23,7 +23,7 @@ async def _pp(_,msg):
     if not replied.photo:
         return await msg.reply("reply to a photo pls")
     image_file_id = replied.photo.file_id
-    m = await _.save_file(file_id=image_file_id)
+    m = await _.save_file(path=None,file_id=image_file_id)
     await msg.reply(m)
     
 async def main():
