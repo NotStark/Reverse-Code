@@ -1,3 +1,3 @@
 - Credits will be appreciatable
-- Dont forget to give a start if u r using this code in your bot
+- Dont forget to give a star if u r using this code in your bot
 - @Tech_Division
