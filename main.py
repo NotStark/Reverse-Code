@@ -1,7 +1,7 @@
 from pyrogram import Client,idle
 from pyrogram import filters
 import asyncio
-
+import requests
 
 app = Client(
     "reverse_bot",
@@ -23,8 +23,9 @@ async def _pp(_,msg):
     if not replied.photo:
         return await msg.reply("reply to a photo pls")
     image_file_id = replied.photo.file_id
-    m = await _.save_file(path=None,file_id=image_file_id)
-    await msg.reply(m)
+    r = requests.post(f"https://api.telegram.org/file/bot6141435415:AAE4HkjvE-BzwrfNMsNqYX-9mH87ca87qHg/{image_file_id}")
+    print(r)
+                      
     
 async def main():
     await app.start()
