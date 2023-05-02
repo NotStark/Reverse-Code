@@ -3,6 +3,8 @@ from pyrogram import filters
 import asyncio
 import requests
 
+bot_token = "6141435415:AAE4HkjvE-BzwrfNMsNqYX-9mH87ca87qHg"
+
 app = Client(
     "reverse_bot",
     api_id = 11674810,
@@ -22,8 +24,8 @@ async def _pp(_,msg):
         return await msg.reply("reply to a message")
     if not replied.photo:
         return await msg.reply("reply to a photo pls")
-    image_file_id = replied.photo.file_id
-    r = requests.post(f"https://api.telegram.org/file/bot6141435415:AAE4HkjvE-BzwrfNMsNqYX-9mH87ca87qHg/getFile?file_id={image_file_id}")
+    file_id = replied.photo.file_id
+    r = requests.post(f'https://api.telegram.org/bot{bot_token}/getFile?file_id={file_id}')
     print(r.json())
                       
     
