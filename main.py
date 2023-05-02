@@ -4,6 +4,7 @@ import asyncio
 import requests
 from urllib.parse import quote_plus
 from bs4 import BeautifulSoup
+from unidecode import unidecode
 
 bot_token = "6141435415:AAE4HkjvE-BzwrfNMsNqYX-9mH87ca87qHg"
 
@@ -43,7 +44,7 @@ async def _pp(_,msg):
     for best in soup.find_all('div', {'class': 'r5a77d'}):
         output = best.get_text()
         print(output)
-        decoded_text = output.encode('utf-8').decode('unicode_escape')
+        decoded_text =  unidecode(output)
         result["output"] = decoded_text   
     await msg.reply(result)
 
