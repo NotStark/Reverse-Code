@@ -37,11 +37,11 @@ async def Sauce(bot_token,file_id):
         
     return result
 
-async def get_file_id_from_message(message):
+async def get_file_id_from_message(msg):
     file_id = None
-    message = message.reply_to_message
+    message = msg.reply_to_message
     if not message:
-        return None
+        return 
     if message.document:
         if int(message.document.file_size) > 3145728:
             return
