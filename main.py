@@ -16,18 +16,7 @@ app = Client(
 )
 
 
-@app.on_message(filters.command("start"))
-async def _start(_,msg):
-    await msg.reply("hey there")
-
-@app.on_message(filters.command("pp"))
-async def _pp(_,msg):
-    replied = msg.reply_to_message
-    if not replied:
-        return await msg.reply("reply to a message")
-    if not replied.photo:
-        return await msg.reply("reply to a photo pls")
-    file_id = replied.photo.file_id
+async def Sauce(bot_token,file_id):
     r = requests.post(f'https://api.telegram.org/bot{bot_token}/getFile?file_id={file_id}').json()
     file_path = r['result']['file_path']
     headers = {'User-agent': 'Mozilla/5.0 (Linux; Android 6.0.1; SM-G920V Build/MMB29K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.98 Mobile Safari/537.36'}
@@ -43,9 +32,24 @@ async def _pp(_,msg):
          result['similar'] = url
     for best in soup.find_all('div', {'class': 'r5a77d'}):
         output = best.get_text()
-        print(output)
         decoded_text =  unidecode(output)
-        result["output"] = decoded_text   
+        result["output"] = decoded_text
+        
+    return result
+    
+@app.on_message(filters.command("start"))
+async def _start(_,msg):
+    await msg.reply("hey there")
+
+@app.on_message(filters.command("pp"))
+async def _pp(_,msg):
+    replied = msg.reply_to_message
+    if not replied:
+        return await msg.reply("reply to a message")
+    if not replied.photo:
+        return await msg.reply("reply to a photo pls")
+    file_id = replied.photo.file_id
+    result = await Sauce(bot_token,file_id)
     await msg.reply(result)
 
  
