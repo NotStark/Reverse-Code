@@ -42,7 +42,7 @@ async def _pp(_,msg):
          result['similar'] = url
     for best in soup.find_all('div', {'class': 'r5a77d'}):
         result['output'] = best.get_text(strip=True)
-    await msg.reply(results)
+    await msg.reply(result)
 
  
                       
