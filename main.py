@@ -5,6 +5,7 @@ import requests
 from urllib.parse import quote_plus
 from bs4 import BeautifulSoup
 from unidecode import unidecode
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup 
 
 bot_token = "6141435415:AAE4HkjvE-BzwrfNMsNqYX-9mH87ca87qHg"
 
@@ -50,8 +51,8 @@ async def _pp(_,msg):
         return await msg.reply("reply to a photo pls")
     file_id = replied.photo.file_id
     result = await Sauce(bot_token,file_id)
-    await msg.reply(result)
-
+    await msg.reply(f'[{result["output"]}]({result["similar"]})',reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Open Link",url=result["similar"])]])
+   
  
                       
     
