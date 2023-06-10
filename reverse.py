@@ -84,7 +84,7 @@ async def _reverse(_,msg):
     result = await Sauce(bot_token,file_id)
     if not result["output"]:
         return await text.edit("Couldn't find anything")
-    await text.edit(f'[{result["output"]}]({result["similar"]})\n\n⇢**Credits** - @The_Only_God',reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Open Link",url=result["similar"])]]))
+    await text.edit(f'[{result["output"]}]({result["similar"]})\n\n⇢**Credits** - @TheStark',reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Open Link",url=result["similar"])]]))
    
  
                       
