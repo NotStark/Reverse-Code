@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 from unidecode import unidecode
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup 
 
-# Credit @the_only_god/@Yeah_Am_Kakashi de dia kar bhayy
+# Credit @the_only_god/@Yeah_Am_Kakashi 
 # -- Requirements --
 # pyrogram
 # Unidecode~=1.3.6
